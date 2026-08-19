@@ -21,7 +21,7 @@ a carefully designed collaborative supervision strategy combines
 multiple losses to ensure effective decoupling. Extensive experiments on four publicly available palmprint datasets demonstrate
 that ISFDNet achieves top performance in both cross-domain and
 in-domain tests, while significantly enhancing the generalization
-capabilities of existing networks
+capabilities of existing networks.
 
 ## Citation
 If our work is valuable to you, please cite our work:

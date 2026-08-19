@@ -63,8 +63,6 @@ def perturb_low_frequency(low_freq_shifted, mode='scale_noise_illumination', ran
     返回:
         perturbed_low_freq_shifted: 扰动后的低频复谱(fftshift 后)。
     """
-    if random_state is not None:
-        np.random.seed(random_state)
 
     rng = np.random.default_rng(random_state)
 

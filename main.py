@@ -12,7 +12,6 @@ import io
 import math
 import torch
 import torch.optim as optim
-from pytorch_lightning import seed_everything
 from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
 
@@ -24,7 +23,6 @@ from train import Train
 from utils.chart import Chart
 from utils.data_set import MyDataset
 from utils.file_util import *
-from utils.reproducibility import get_dataloader_generator, seed_worker
 from verify import Verify
 
 parser = argparse.ArgumentParser(
@@ -112,7 +110,6 @@ batch_size = 256  # 批大小
 lr = 0.0005  # 初始学习率
 step = 50  # 学习调度的步长
 run_type = args.run_type  # 运行类型
-seed = 3407    # 种子
 
 if __name__ == '__main__':
     print('\n----Start Of Program----')
@@ -130,8 +127,6 @@ if __name__ == '__main__':
                   backbone_name, epochs, batch_size, lr, step))
     print('Now time is', datetime.datetime.now())
 
-    seed_everything(seed)
-
     os.makedirs(model_path, exist_ok=True)
     os.makedirs(file_path, exist_ok=True)
     os.makedirs(chart_path, exist_ok=True)
@@ -142,12 +137,9 @@ if __name__ == '__main__':
     test_data = MyDataset(txt=test_file, database_name=database_name,
                           label_num=label_num, transforms=None, train=False, image_size=128, out_channels=1)
 
-    g = get_dataloader_generator(seed)
     train_data_loader = DataLoader(dataset=train_data, batch_size=batch_size, num_workers=4, shuffle=True,
-                                   worker_init_fn=seed_worker, generator=g
                                    )
     test_data_loader = DataLoader(dataset=test_data, batch_size=128, num_workers=2, shuffle=False,
-                                  worker_init_fn=seed_worker, generator=g
                                   )
     print('Load data end!\n')
 
